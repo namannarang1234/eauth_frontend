@@ -23,7 +23,12 @@ export default function Login() {
 
       if (res.status === 200) {
         localStorage.setItem("email", email);
-        window.location.replace("/verification");
+
+        if (localStorage.getItem("token")) {
+          window.location.replace("/welcome");
+        } else {
+          window.location.replace("/verification");
+        }
       } else {
         setLoading(false);
         if (res.status === 401) {
